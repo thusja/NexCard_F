@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공유된 명함</title>
+  <meta property="og:title" content="명함 공유" />
+  <meta property="og:description" content="공유된 명함을 확인해보세요" />
+  <meta property="og:image" content="" id="ogImage" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" id="ogUrl" />
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <img id="cardImage" alt="공유된 명함 이미지" />
+  </div>
+
+  <script>
+    // ✅ URL 파라미터에서 img= 값을 추출
+    const params = new URLSearchParams(window.location.search);
+    const imgUrl = params.get("img");
+
+    if (imgUrl) {
+      const img = document.getElementById("cardImage");
+      img.src = imgUrl;
+
+      // ✅ og 태그도 동적으로 설정 (카카오톡 미리보기용)
+      document.querySelector('meta[property="og:image"]').setAttribute("content", imgUrl);
+      document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
+    } else {
+      document.getElementById("container").innerHTML = "<p>이미지 정보가 없습니다.</p>";
+    }
+  </script>
+</body>
+</html>
