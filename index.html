@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>디지털 명함 생성기</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script async defer src="https://accounts.google.com/gsi/client"></script>
+</head>
+<body>
+  <header>
+    <h1>디지털 명함 생성기</h1>
+    <p>정보를 입력하고 나만의 디지털 명함을 만들어보세요!</p>
+  </header>
+
+  <div class="container">
+    <div class="form-container">
+      <div class="title-container">
+        <h2>정보 입력</h2>
+        <span id="helpIcon" class="help-icon" title="사용법 보기">?</span>
+        <span id="errorIcon" class="error-icon" title="오류 안내">!</span>
+      </div>
+
+      <form class="cardForm" id="cardForm" autocomplete="off">
+        <div class="form-group">
+          <label for="name">이름</label>
+          <input type="text" id="name" placeholder="이름을 입력하세요" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="job">직업/직책</label>
+          <input type="text" id="job" placeholder="직업 또는 직책을 입력하세요" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="company">회사/기관</label>
+          <input type="text" id="company" placeholder="회사 또는 기관명을 입력하세요" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" placeholder="이메일 주소를 입력하세요" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">연락처</label>
+          <input type="tel" id="phone" placeholder="하이픈을 빼고 전화번호를 입력하세요" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        </div>
+        
+        <div class="form-group">
+          <label for="address">주소</label>
+          <input type="text" id="address" placeholder="주소를 입력하세요" required>
+        </div>
+
+        <div class="form-group">
+          <label for="website">웹사이트</label>
+          <input type="url" id="website" placeholder="웹사이트 주소를 입력하세요">
+        </div>
+
+        <button type="button" id="generateBtn">명함 생성하기</button>
+      </form>
+    </div>
+
+    <div class="preview-container">
+      <h2>미리보기</h2>
+      <div class="card-preview">
+        <div class="card">
+          <div class="card-content" id="cardContent">
+            <div class="card-name" id="cardName">홍길동</div>
+            <div class="card-job" id="cardJob">소프트웨어 개발자</div>
+
+            <div class="card-details company-line">
+              <div class="card-details" id="cardCompany">ABC 기업</div>
+              <img id="companyLogo" alt="로고"  />
+            </div>
+
+            <div class="card-details" id="cardEmail">hong@example.com</div>
+            <div class="card-details" id="cardPhone">010-1234-5678</div>
+            <div class="card-details" id="cardAddress">서울시 강남구</div>
+            <div class="card-details" id="cardWebsite">www.example.com</div>
+          </div>
+          
+          <div class="card-qr" id="cardQr">
+            <div id="qrCode"></div>
+            <div id="qrCodeText">QR코드</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="share-buttons">
+        <button class="share-button" id="vCardBtn" disabled>vCard 다운</button>
+        <button class="share-button" id="imgBtn">이미지 다운</button>
+        <button class="share-button" id="shareBtn">카카오 공유하기</button>
+        <button class="share-button" id="sendEmailBtn">이메일 보내기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">디지털 명함 사용법</div>
+      <div class="modal-body">
+        <p>1. 왼쪽에 정보를 입력하세요.</p>
+        <p>2. 웹사이트 주소를 입력하면 QR코드가 자동으로 생성됩니다.</p>
+        <p>3. '명함 생성하기' 버튼을 눌러 미리보기를 확인하세요.</p>
+        <p>4. 필요한 버튼을 눌러 저장 또는 공유하세요.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeModalBtn">확인</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="errorModal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">오류 안내</div>
+      <div class="modal-body">
+        <p>현재 사용할 수 없는 기능입니다.</p> </br>
+        <p>1. 한글이 깨지는 오류로 인해 vCard 다운로드 버튼이 <br> 비활성화 되었습니다.</p>
+        <p>2. 이메일 보내기 버튼은 지메일로 나에게 보내기 기능이지만 <br> 구글의 민감한 범위 인증을 받지 못해 토큰만 받아 올 수 있습니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="closeErrorModalBtn">확인</button>
+      </div>
+    </div>
+  </div>  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
