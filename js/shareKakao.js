@@ -37,6 +37,9 @@ export default async function shareKakao() {
 
         const imageUrl = uploadResult.imageUrl;
 
+            // ✅ 공유용 카드 HTML 페이지 링크 구성 (Vercel에 배포된 프론트엔드 기준)
+    const sharePageUrl = `https://nex-card-one.vercel.app/card.html?img=${encodeURIComponent(imageUrl)}`;
+
         // 카카오톡 공유하기
         Kakao.Link.sendDefault({
             objectType: 'feed',
@@ -45,8 +48,8 @@ export default async function shareKakao() {
                 description: document.getElementById("cardJob").textContent,
                 imageUrl: imageUrl,
                 link: {
-                    mobileWebUrl: imageUrl,
-                    webUrl: imageUrl
+                    mobileWebUrl: sharePageUrl,
+                    webUrl: sharePageUrl
                 }
             }
         });
