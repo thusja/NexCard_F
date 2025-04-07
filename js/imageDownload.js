@@ -6,7 +6,18 @@ function isMobile() {
   return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 }
 
+// 카카오톡 인앱 브라우저 감지 함수
+function isKakaoInAppBrowser() {
+  return /KAKAOTALK/i.test(navigator.userAgent);
+}
+
 export default async function imageDownload() {
+  // 카카오 인앱 브라우저에서 다운로드 차단 안내
+  if (isKakaoInAppBrowser()) {
+    alert("카카오톡 브라우저에서는 이미지 다운로드가 제한됩니다.\n다른 브라우저로 열어주세요.");
+    return;
+  }
+
   try {
     const blob = await captureCardAsBlob();
     const fileName = "business_card.png";
