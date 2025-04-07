@@ -51,7 +51,6 @@ export default async function qrCode() {
       console.warn("유효하지 않은 도메인 또는 연결 불가");
       return;
     }
-
   } catch (e) {
     // 잘못된 URL 형식 → QR코드 생성 취소
     qrCodeDiv.innerHTML = "";
@@ -74,7 +73,6 @@ export default async function qrCode() {
       qrCodeText.style.display = "none";
     };
     reader.readAsDataURL(blob);
-
   } catch (error) {
     console.error("QR 코드 생성 중 오류가 발생했습니다:", error);
     

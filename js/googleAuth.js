@@ -52,4 +52,3 @@ export function loginWithGoogle() {
 export function getAuthToken() {
   return accessToken;
 }
-

@@ -28,7 +28,6 @@ export default async function imageDownload() {
       setTimeout(() => {
         window.open(blobUrl, "_blank");
       }, 300);
-
       return;
     }
 
