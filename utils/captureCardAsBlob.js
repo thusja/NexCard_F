@@ -17,7 +17,7 @@ export default async function captureCardAsBlob() {
   const ctx = resizedCanvas.getContext('2d');
 
   // 원본 캔버스를 리사이즈하여 그리기
-  ctx.drawImage(originalCanvas, 0, 0, targetWidth, targetHeight);
+  ctx.drawImage(canvas, 0, 0, targetWidth, targetHeight);
 
   // Blob으로 변환
   return new Promise((resolve, reject) => {
