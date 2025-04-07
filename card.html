@@ -7,8 +7,6 @@
   <meta property="og:title" content="명함 공유" />
   <meta property="og:description" content="공유된 명함을 확인해보세요" />
   <meta property="og:image" content="" id="https://nexcard-b.onrender.com/uploads/business_card.png" />
-  <meta property="og:image:width" content="400">
-  <meta property="og:image:height" content="200">
   <meta property="og:type" content="website" />
   <meta property="og:url" content="" id="https://nex-card-one.vercel.app/card.html" />
   <style>
@@ -22,11 +20,13 @@
       background: #f9f9f9;
     }
     img {
-      max-width: 100%;
-      height: auto;
+      width: 400px;
+      height: 200px;
+      object-fit: contain;
       border: 2px solid #ddd;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background-color: white;
     }
     @media (max-width: 820px) {
       img {
