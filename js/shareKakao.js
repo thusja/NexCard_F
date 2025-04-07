@@ -48,8 +48,8 @@ export default async function shareKakao() {
         description: document.getElementById("cardJob").textContent,
         imageUrl: imageUrl,
         link: {
-          mobileWebUrl: sharePageUrl,
-          webUrl: sharePageUrl
+          mobileWebUrl: `https://nex-card-one.vercel.app/card.html?img=${encodeURIComponent(imageUrl)}`,
+          webUrl: `https://nex-card-one.vercel.app/card.html?img=${encodeURIComponent(imageUrl)}`
         }
       }
     });
