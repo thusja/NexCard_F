@@ -297,9 +297,9 @@ button:hover {
 .error-icon {
     margin-left: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 50%;
-    width: 16px;
+    width: 20px;
     height: 20px;
     display: flex;
     align-items: center;
@@ -327,6 +327,16 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     max-width: 440px;
+    width: 80%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.modal2 {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 420px;
     width: 80%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
