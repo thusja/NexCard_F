@@ -393,7 +393,7 @@ button:hover {
 }
 
 #errorIcon::after {
-    content: "현재 지원되지 않는 기능입니다.\A 오류 발생 시 문의해주세요.";
+    content: "안내 메세지입니다.\A 오류 발생 시 문의해주세요.";
     white-space: pre-line;
     position: absolute;
     top: 120%;
