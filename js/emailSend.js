@@ -21,31 +21,34 @@ export default async function sendEmail() {
     return;
   }
 
-  const emailContent = `
-  Content-Type: multipart/mixed; boundary="boundary_string"
-  MIME-Version: 1.0
-  Subject: 내 명함 정보
-  From: me
-  To: your-email@example.com
-
-  --boundary_string
-  Content-Type: text/plain; charset="UTF-8"
-  Content-Transfer-Encoding: 7bit
-
-  첨부된 이미지는 내 명함입니다.
-
-  --boundary_string
-  Content-Type: image/png
-  Content-Transfer-Encoding: base64
-  Content-Disposition: attachment; filename="business_card.png"
-
-  ${base64Image.split(",")[1]}
-  --boundary_string--
-  `;
+  // 📌 명확한 MIME 구조 (줄바꿈, 헤더 포함 주의)
+  const emailContent = [
+    'Content-Type: multipart/mixed; boundary="boundary_string"',
+    'MIME-Version: 1.0',
+    'Subject: 내 명함 정보',
+    'From: me',
+    'To: rebearose@gmail.com',
+    '',
+    '--boundary_string',
+    'Content-Type: text/plain; charset="UTF-8"',
+    'Content-Transfer-Encoding: 7bit',
+    '',
+    '첨부된 이미지는 내 명함입니다.',
+    '',
+    '--boundary_string',
+    'Content-Type: image/png',
+    'Content-Transfer-Encoding: base64',
+    'Content-Disposition: attachment; filename="business_card.png"',
+    '',
+    base64Image.split(',')[1], // Data URI에서 base64만 추출
+    '',
+    '--boundary_string--',
+    ''
+  ].join('\r\n'); // 👉 줄바꿈 통일
 
   try {
-    // base64 인코딩 방식 수정 (유니코드 대응)
-    const base64EncodedEmail = btoa(unescape(encodeURIComponent(emailContent)))
+    // Gmail이 요구하는 base64url 인코딩 (RFC 4648)
+    const base64EncodedEmail = btoa(emailContent)
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
       .replace(/=+$/, '');
@@ -65,8 +68,8 @@ export default async function sendEmail() {
       alert("이메일이 성공적으로 전송되었습니다!");
     } else {
       const errorData = await response.json();
-      console.error("이메일 전송 오류:", errorData);
-      alert("이메일 전송 실패: " + (errorData.error || "알 수 없는 오류"));
+      console.error("전체 오류 응답:", JSON.stringify(errorData, null, 2));
+      alert("이메일 전송 실패: " + (errorData.error?.message || "알 수 없는 오류"));
     }
   } catch (error) {
     console.error("이메일 전송 중 오류 발생:", error);
