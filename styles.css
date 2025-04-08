@@ -279,10 +279,23 @@ button:hover {
     align-items: center;
 }
 
-.help-icon, .error-icon {
+.help-icon {
     margin-left: 10px;
     cursor: pointer;
     font-size: 14px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.error-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
     border-radius: 50%;
     width: 20px;
     height: 20px;
