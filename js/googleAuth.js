@@ -23,7 +23,7 @@ export default async function googleAuth() {
   // Google Identity Services를 사용하여 토큰 클라이언트 초기화
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: GOOGLE_CLIENT_ID,
-    scope: 'https://www.googleapis.com/auth/gmail.send',
+    scope: 'https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.email',
     callback: async (response) => {
       if (response.error) {
         console.error('Google 인증 오류:', response.error);
