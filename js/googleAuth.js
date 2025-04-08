@@ -2,6 +2,7 @@
 let GOOGLE_CLIENT_ID = '';
 let tokenClient = null;
 let accessToken = '';
+let userEmail = '';
 
 export default async function googleAuth() {
   const response = await fetch("https://nexcard-b.onrender.com/api/env"); // 서버로부터 환경 변수 요청
@@ -23,12 +24,25 @@ export default async function googleAuth() {
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: GOOGLE_CLIENT_ID,
     scope: 'https://www.googleapis.com/auth/gmail.send',
-    callback: (response) => {
+    callback: async (response) => {
       if (response.error) {
         console.error('Google 인증 오류:', response.error);
       } else {
         accessToken = response.access_token;
         console.log('Google 인증 성공! 토큰이 발급되었습니다.');
+
+        try {
+          const userInfoRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          });
+          const userInfo = await userInfoRes.json();
+          userEmail = userInfo.email;
+          console.log('로그인된 사용자 이메일:', userEmail);
+        } catch (err) {
+          console.error('사용자 정보 요청 실패:', err);
+        }
       }
     }
   });
