@@ -4,7 +4,7 @@
 
 ## 🔗 프로젝트 링크
 
-- 🔗 **Homepage**:[NexCard](https://nex-card-one.vercel.app/)
+- 🔗 **Homepage**: [NexCard](https://nex-card-one.vercel.app/)
 - 💻 **GitHub**: [Frontend](https://github.com/thusja/NexCard_F) [Backend](https://github.com/thusja/NexCard_B)
 - 📄 **발표 자료**: [notion](https://rough-lime-f80.notion.site/js-api-1b92d24c870d80418662e4c3c79b1fc0)
 
