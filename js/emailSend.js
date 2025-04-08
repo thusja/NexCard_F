@@ -1,4 +1,4 @@
-import { checkGoogleLogin, loginWithGoogle, getAuthToken } from "./googleAuth.js";
+import { checkGoogleLogin, loginWithGoogle, getAuthToken, getUserEmail } from "./googleAuth.js";
 import captureCardAsBase64 from "../utils/captureCardAsBase64.js";
 
 // 유니코드-safe Base64 인코딩 함수
@@ -30,6 +30,13 @@ export default async function sendEmail() {
     return;
   }
 
+  // 본인 이메일 가져오기
+  const userEmail = getUserEmail();
+  if (!userEmail) {
+    alert("사용자 이메일을 확인할 수 없습니다. 다시 로그인해 주세요.");
+    return;
+  }
+
   const base64Image = await captureCardAsBase64(); // 명함 이미지를 Base64로 변환
 
   if (!base64Image) {
@@ -45,7 +52,7 @@ export default async function sendEmail() {
     'MIME-Version: 1.0',
     `Subject: ${subject}`,
     'From: me',
-    'To: rebearose@gmail.com',
+    `To: ${userEmail}`,
     '',
     '--boundary_string',
     'Content-Type: text/plain; charset="UTF-8"',
