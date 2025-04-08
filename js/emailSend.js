@@ -43,7 +43,7 @@ export default async function sendEmail() {
   const emailContent = [
     'Content-Type: multipart/mixed; boundary="boundary_string"',
     'MIME-Version: 1.0',
-    'Subject: ${subject}',
+    `Subject: ${subject}`,
     'From: me',
     'To: rebearose@gmail.com',
     '',
