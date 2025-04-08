@@ -1,6 +1,14 @@
 import { checkGoogleLogin, loginWithGoogle, getAuthToken } from "./googleAuth.js";
 import captureCardAsBase64 from "../utils/captureCardAsBase64.js";
 
+// ✅ 유니코드-safe Base64 인코딩 함수
+function encodeToBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
 export default async function sendEmail() {
   if (!checkGoogleLogin()) {
     alert("Google 로그인이 필요합니다.");
@@ -47,11 +55,8 @@ export default async function sendEmail() {
   ].join('\r\n'); // 👉 줄바꿈 통일
 
   try {
-    // Gmail이 요구하는 base64url 인코딩 (RFC 4648)
-    const base64EncodedEmail = btoa(emailContent)
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=+$/, '');
+    // ✅ 유니코드-safe base64url 인코딩
+    const base64EncodedEmail = encodeToBase64(emailContent);
 
     const response = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
       method: 'POST',
