@@ -38,9 +38,6 @@ export default async function vCardDownload() {
   }
 
   try {
-    
-    
-
     // 파일 저장 다이얼로그 열기
     const fileHandle = await window.showSaveFilePicker({
       suggestedName: "business_card.vcf",
