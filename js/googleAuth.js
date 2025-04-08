@@ -66,3 +66,8 @@ export function loginWithGoogle() {
 export function getAuthToken() {
   return accessToken;
 }
+
+// 유저 이메일 받아오기
+export function getUserEmail() {
+  return userEmail;
+}
