@@ -50,9 +50,9 @@
       const img = document.getElementById("cardImage");
       img.src = imgUrl;
 
-      // og 태그도 동적으로 설정 (카카오톡 미리보기용 - 너무 커서 고정 설계)
-      // document.querySelector('meta[property="og:image"]').setAttribute("content", imgUrl);
-      // document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
+      // og 태그도 동적으로 설정 (카카오톡 미리보기용)
+      document.querySelector('meta[property="og:image"]').setAttribute("content", imgUrl);
+      document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
     } else {
       document.getElementById("container").innerHTML = "<p>이미지 정보가 없습니다.</p>";
     }
