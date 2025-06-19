@@ -1,7 +1,7 @@
 # 🕵️‍♂️ NexCard
 > **디지털 명함 생성기**
 
-![page]()
+![page](https://github.com/thusja/NexCard_F/blob/main/docs/indexPage.PNG)
 
 <br>
 
@@ -38,7 +38,7 @@
 
 ### 📁 폴더 구조
 
-| ![Frontend]() | ![Backend]() |
+| ![Frontend](https://github.com/thusja/NexCard_F/blob/main/docs/front.PNG) | ![Backend](https://github.com/thusja/NexCard_F/blob/main/docs/back.PNG) |
 
 ---
 
